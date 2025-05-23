@@ -30,8 +30,9 @@ Install the package in development mode:
 ### Poetry Setup (Recommended)
 
 1. Install poetry
-``` pip install poetry
-```
+   ``` bash
+   pip install poetry
+   ```
 
 2. Activate the virtual environment:
    ```bash
