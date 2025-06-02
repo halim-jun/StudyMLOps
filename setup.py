@@ -11,6 +11,7 @@ setup(
     install_requires=[
         "pandas>=2.2.3,<3.0.0",
         "matplotlib>=3.10.3,<4.0.0",
+        "kagglehub>=0.2.0",
     ],
     readme="README.md",
 )
