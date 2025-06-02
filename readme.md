@@ -5,15 +5,17 @@ A Python project for MLOps study.
 ## Project Structure
 
 ```
-example-project/
+FIRST_ROUND/
 ├── pyproject.toml    # Poetry configuration
 ├── setup.py          # Setuptools configuration
 └── project
     ├── data
-    │   ├── raw/          # Raw downloaded data
-    │   └── get_data.py   # Data download script
+    │   ├── personality_dataset          # Raw downloaded data
+    │   └── test_data.py   # Data download script
+    │   └── train_data.py   # Data download script
     └── src
-        └── example.py
+        └── main.py
+        └── pipeline.py
 ```
 
 ## Setup
@@ -60,7 +62,7 @@ To download the dataset:
    python project/data/get_data.py
    ```
 
-The data will be downloaded to `project/data/raw/` directory.
+The data will be downloaded to `project/data` directory.
 
 ## Dependencies
 
