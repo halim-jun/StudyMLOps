@@ -1,4 +1,4 @@
-# Example Project
+# Example Project (성격 분류)
 
 A Python project for MLOps study.
 
@@ -11,25 +11,25 @@ FIRST_ROUND/
 └── project
     ├── data
     │   ├── personality_dataset          # Raw downloaded data
-    │   └── test_data.py   # Data download script
-    │   └── train_data.py   # Data download script
+    │   └── test_data.csv   # Data download script
+    │   └── train_data.csv   # Data download script
     └── src
         └── main.py
         └── pipeline.py
 ```
 
-## Setup
+- pipeline.py : 데이터 전처리 및 머신러닝
+   - 데이터 형변환
+   - train test split (2:8)
+   - logistic regression 
+   - 결과 출력
+
+## Setup/설정
 
 This project can be set up using either Poetry or setup.py.
+이 프로젝트는 Poetry 또는 setup.py를 사용하여 설정할 수 있습니다.
 
-### Setup.py Alternative
 
-If you prefer using setup.py instead of Poetry:
-
-Install the package in development mode:
-   ```bash
-   pip install -e .
-   ```
 
 ### Poetry Setup (Recommended)
 
@@ -47,26 +47,19 @@ Install the package in development mode:
    ```bash
    poetry shell
    ```
+### Setup.py Alternative
 
-## Data Management
+poetry 가 더 추천되나 setup.py 도 가능
 
-To download the dataset:
-
-1. Make sure you have kagglehub installed:
+Install the package in development mode:
    ```bash
-   pip install kagglehub
+   pip install -e .
    ```
 
-2. Run the data download script:
-   ```bash
-   python project/data/get_data.py
+# Running the code / 코드 실행
+
+   ```
+   python project/src/main.py
    ```
 
-The data will be downloaded to `project/data` directory.
 
-## Dependencies
-
-- Python >= 3.10
-- pandas >= 2.2.3
-- matplotlib >= 3.10.3
-- kagglehub (for data download)
