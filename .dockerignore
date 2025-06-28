@@ -1,0 +1,45 @@
+# Git files
+.git
+.gitignore
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+*.md
+
+# Poetry files (we're using requirements.txt)
+poetry.lock
+
+# Test files
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+
+# Other
+.dockerignore
+Dockerfile* 
