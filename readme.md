@@ -62,4 +62,16 @@ Install the package in development mode:
    python project/src/main.py
    ```
 
+# 도커 이미지 빌드 및 실행
 
+## 이미지 빌드
+   ```
+   docker build -t my-mlops-project .
+   ```
+
+## 컨테이너 실행
+   ```
+   docker run my-mlops-project
+   ```
+
+   
