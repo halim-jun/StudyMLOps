@@ -1,0 +1,112 @@
+[MASTER]
+# Python 버전
+py-version=3.10
+
+# 병렬 처리
+jobs=0
+
+# 설정 파일 위치
+rcfile=
+
+# 추가 Python 경로
+init-hook=
+
+# 사용할 플러그인
+load-plugins=
+
+# 분석할 파일 확장자
+extension-pkg-whitelist=
+
+# 무시할 파일/폴더
+ignore=CVS,.git,__pycache__,.venv,venv
+ignore-patterns=
+ignore-paths=
+
+# 재귀적으로 분석할 최대 깊이
+recursive=yes
+
+# 분석할 파일 크기 제한 (KB)
+max-line-length=100
+
+# 분석할 모듈 수 제한
+max-module-lines=1000
+
+[MESSAGES CONTROL]
+# 비활성화할 메시지들
+disable=C0111,  # missing-docstring
+        C0103,  # invalid-name
+        C0303,  # trailing-whitespace
+        W0621,  # redefined-outer-name
+        R0903,  # too-few-public-methods
+        R0913,  # too-many-arguments
+        W0703,  # broad-except
+        W0612,  # unused-variable
+        W0611,  # unused-import
+
+[REPORTS]
+# 출력 형식
+output-format=text
+
+# 점수 표시
+score=yes
+
+# 평가 기준
+evaluation=10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)
+
+# 색상 출력
+color=yes
+
+# 분석 통계 표시
+reports=yes
+
+# 분석된 파일 목록 표시
+files-output=no
+
+# 모듈별 분석 결과 표시
+reports-output=no
+
+[BASIC]
+# 좋은 변수명 패턴
+good-names=i,j,k,ex,Run,_,id,db
+
+# 나쁜 변수명 패턴
+bad-names=foo,bar,baz,toto,tutu,tata
+
+# 이름 규칙
+name-group=
+include-naming-hint=no
+function-naming-style=snake_case
+variable-naming-style=snake_case
+const-naming-style=UPPER_CASE
+class-naming-style=PascalCase
+module-naming-style=snake_case
+
+[FORMAT]
+# 최대 줄 길이
+max-line-length=100
+
+# 들여쓰기 크기
+indent-size=4
+
+# 들여쓰기 문자
+indent-string='    '
+
+# 최대 모듈 줄 수
+max-module-lines=1000
+
+[SIMILARITIES]
+# 최소 유사 라인 수
+min-similarity-lines=4
+
+# 무시할 주석
+ignore-comments=yes
+
+# 무시할 docstring
+ignore-docstrings=yes
+
+# 무시할 import
+ignore-imports=no
+
+[MISCELLANEOUS]
+# 주석 정규식
+notes= 

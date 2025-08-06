@@ -1,33 +1,22 @@
-#Name of the workflow
-name : implement github action for training and testing
+name : train and test
+on :
+  push :
+jobs :
+  build:
+  runs-on : ubuntu-latest
+  steps: 
+    - uses :actions/checkout@v4
+    - name : Set up python 3.10
+      uses : actions/setup-python@v1
+      with : 
+        python-version : 3.10
+    - name : Install dependencies
+      run :|
+        make install
+    - name : Lint
+      run : |
+        make lint
+    - name : Test
+      run : |
+        make test
 
-#Event 가 실행되는 시점 - 메인에 push 되었을때 시행
-on : 
-  push:
-    branches: 
-      - main
-
-#하나의 workflow 는 하나 이상의 job 으로 구성됨
-#여러 job 은 병렬적으로 수행됨
-
-jobs: 
-  #Job 을 식별하기 위한 ID -> 내부에 나타남
-  My-deploy-job : 
-    #ubuntu 환경에서 실행 (실행될 운영체제 고르기)
-    runs-on : ubuntu-latest
-    #특정 작업을 수행하는 가장 작은 단위
-    steps : 
-      - name : checkout code
-      #리눅스 코드
-      #|를 쓰면 여러줄 가능
-        run : |
-          echo "Good"
-          echo "morning"
-          echo "hello world"
-      - name : Github action 자체에 저장된 변수를 사용해보기 #커밋의 자체 아이디 : SHA, secret 변수도 내가 설정 가능함
-      #비밀 변수가 가능함(settings -> screts and variables)
-        run : |
-          echo $GITHUB_SHA
-          echo $GITHUB_REPOSITORY
-          echo ${{ secrets.MY_HOBBY}}
-        
