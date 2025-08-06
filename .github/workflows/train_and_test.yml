@@ -1,14 +1,14 @@
 name : implement github action for training and testing
 
 on : 
-  push : 
-    branches : 
+  push:
+    branches: 
       - main
 
 
-jobs : 
+jobs: 
   My-deploy-job : 
-    run-on : ubuntu-latest
+    runs-on : ubuntu-latest
 
     steps : 
       - name : checkout code
