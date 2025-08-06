@@ -1,15 +1,26 @@
+#Name of the workflow
 name : implement github action for training and testing
 
+#Event 가 실행되는 시점 - 메인에 push 되었을때 시행
 on : 
   push:
     branches: 
       - main
 
+#하나의 workflow 는 하나 이상의 job 으로 구성됨
+#여러 job 은 병렬적으로 수행됨
 
 jobs: 
+  #Job 을 식별하기 위한 ID -> 내부에 나타남
   My-deploy-job : 
+    #ubuntu 환경에서 실행 (실행될 운영체제 고르기)
     runs-on : ubuntu-latest
-
+    #특정 작업을 수행하는 가장 작은 단위
     steps : 
       - name : checkout code
-        run : echo "hello world"
+      #리눅스 코드
+      #|를 쓰면 여러줄 가능
+        run : |
+          echo "Good"
+          echo "morning"
+          echo "hello world"
