@@ -1,0 +1,15 @@
+name : implement github action for training and testing
+
+on : 
+  push : 
+    branches : 
+      - main
+
+
+jobs : 
+  My-deploy-job : 
+    run-on : ubuntu-latest
+
+    steps : 
+      - name : checkout code
+        run : echo "hello world"
