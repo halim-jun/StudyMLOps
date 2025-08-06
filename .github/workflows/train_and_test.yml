@@ -24,3 +24,10 @@ jobs:
           echo "Good"
           echo "morning"
           echo "hello world"
+      - name : Github action 자체에 저장된 변수를 사용해보기 #커밋의 자체 아이디 : SHA, secret 변수도 내가 설정 가능함
+      #비밀 변수가 가능함(settings -> screts and variables)
+        run : |
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
+          echo ${{ secrets.MY_HOBBY}}
+        
