@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.10]
+        python-version: ["3.10"]
 
     steps:
     - uses: actions/checkout@v4
     
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     
@@ -57,7 +57,7 @@ jobs:
     
     - name: Run tests
       run: |
-        pytest tests/ -v --cov=project --cov-report=xml || echo "No tests found"
+        pytest project/tests -v --cov=project --cov-report=xml || echo "No tests found"
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
