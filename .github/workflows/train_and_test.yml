@@ -43,3 +43,11 @@ jobs:
         run: |
           make test
 
+      - name: Run training
+        run: |
+          python project/src/training.py
+      
+      - name: Run tests
+        run: |
+          make test
+

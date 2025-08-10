@@ -5,4 +5,4 @@ install :
 lint : 
 	pylint project/src/pipeline.py
 test:
-	python -m pytest project/tests/test_pipeline.py
+	python -m pytest project/tests -v
