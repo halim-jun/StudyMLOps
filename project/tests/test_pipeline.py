@@ -1,33 +1,37 @@
-import os
-import pandas as pd
 import numpy as np
+import pandas as pd
 from pathlib import Path
 from project.src.pipeline import ModelPipeline
 
 
+def _make_tiny_raw_csv(tmp_dir: Path) -> Path:
+    df = pd.DataFrame({
+        "Personality": ["Extrovert", "Introvert", "Extrovert", "Introvert", "Extrovert", "Introvert"],
+        "Stage_fear": ["Yes", "No", "Yes", "No", "No", "Yes"],
+        "Drained_after_socializing": ["Yes", "No", "No", "Yes", "No", "Yes"],
+    })
+    csv_path = tmp_dir / "tiny.csv"
+    df.to_csv(csv_path, index=False)
+    return csv_path
 
 
-def test_process_and_split():    
-    tmp_path = "project/tests/test_data.csv"
-    mp = ModelPipeline(tmp_path)
+def test_process_train_predict(tmp_path: Path):
+    raw_csv = _make_tiny_raw_csv(Path(tmp_path))
+    mp = ModelPipeline(str(raw_csv))
     processed = mp.preprocess_data()
-    assert {"Stage_fear_bool","Drained_after_socializing_bool","extrovert"}.issubset(processed.columns)
-    train_data, test_data = mp.train_test_split(processed, tmp_path)
-    assert not train_data.empty
-    assert not test_data.empty
-    mp.train_model(train_data)
-    assert mp.logistic_clf is not None
-    assert mp.predict(test_data) is not None
-    assert (tmp_path / "train_data.csv").exists()
-    assert (tmp_path / "test_data.csv").exists()
-    assert (tmp_path / "logistic_clf.joblib").exists()
-    model = mp.train_model(train_data)
-    mp.save_model(tmp_path / "logistic_clf.joblib")
-    prediction = mp.predict(test_data)
-    assert model is not None
-    assert prediction is not None
-    assert len(prediction) == len(test_data)
-    assert len(prediction) == len(test_data)
-    prediction_set = np.unique(prediction)
-    uniq = set(map(int, np.unique(prediction_set)))
-    assert uniq.issubset({0,1})
+    assert {"Stage_fear_bool", "Drained_after_socializing_bool", "extrovert"}.issubset(processed.columns)
+
+    train_df, test_df = mp.train_test_split(processed, str(tmp_path))
+    assert not train_df.empty and not test_df.empty
+
+    model = mp.train_model(train_df)
+    preds = mp.predict(test_df)
+    assert len(preds) == len(test_df)
+    uniq = set(map(int, np.unique(preds)))
+    assert uniq.issubset({0, 1})
+
+    # ensure artifacts are written
+    assert (Path(tmp_path) / "train_data.csv").exists()
+    assert (Path(tmp_path) / "test_data.csv").exists()
+    mp.save_model(str(Path(tmp_path) / "logistic_clf.joblib"))
+    assert (Path(tmp_path) / "logistic_clf.joblib").exists()
