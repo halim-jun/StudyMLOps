@@ -12,9 +12,7 @@ raw_data_dir.mkdir(parents=True, exist_ok=True)
 
 # Download latest version
 print("Downloading dataset...")
-downloaded_path = kagglehub.dataset_download(
-    "rakeshkapilavai/extrovert-vs-introvert-behavior-data"
-)
+downloaded_path = kagglehub.dataset_download("rakeshkapilavai/extrovert-vs-introvert-behavior-data")
 
 print(f"Dataset downloaded to: {downloaded_path}")
 

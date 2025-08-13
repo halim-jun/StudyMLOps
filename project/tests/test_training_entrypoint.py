@@ -10,4 +10,3 @@ def test_training_entrypoint_runs(monkeypatch, tmp_path):
     # Model artifact should be created in the tmp directory
     assert (Path(tmp_path) / "logistic_clf.joblib").exists()
 
-
