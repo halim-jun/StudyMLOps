@@ -21,33 +21,41 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Cache pip dependencies
+      - name: Cache Poetry
         uses: actions/cache@v3
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          path: |
+            ~/.cache/pypoetry
+            ~/.cache/pip
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
           restore-keys: |
-            ${{ runner.os }}-pip-
+            ${{ runner.os }}-poetry-
 
-      - name: Install dependencies
+      - name: Install Poetry
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pylint flake8 pytest pytest-cov
+          python -m pip install pipx
+          pipx install poetry
+
+      - name: Install dependencies (Poetry with dev, no project install)
+        run: |
+          poetry --version
+          poetry install --no-root --with dev
 
       - name: Run linting
         run: |
-          make lint
+          poetry run flake8 project/ --max-line-length=100
+          poetry run pylint project/ --fail-under=7.0
 
       - name: Run tests
         run: |
-          make test
+          poetry run pytest project/tests -v
 
       - name: Run training
         run: |
-          python project/src/training.py
+          poetry run python project/src/training.py
       
       - name: Run tests
         run: |
-          make test
+          poetry run pytest project/tests -v
 

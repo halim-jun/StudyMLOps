@@ -37,10 +37,10 @@ jobs:
         python -m pip install pipx
         pipx install poetry
 
-    - name: Install dependencies (Poetry with dev)
+    - name: Install dependencies (Poetry with dev, no project install)
       run: |
         poetry --version
-        poetry install --with dev
+        poetry install --no-root --with dev
     
     - name: Run Black (code formatter)
       run: |
