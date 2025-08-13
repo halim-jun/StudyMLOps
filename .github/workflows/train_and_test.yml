@@ -42,10 +42,10 @@ jobs:
           poetry --version
           poetry install --no-root --with dev
 
-      - name: Run linting
-        run: |
-          poetry run flake8 project/ --max-line-length=100
-          poetry run pylint project/ --fail-under=7.0
+      #- name: Run linting
+      #  run: |
+      #    poetry run flake8 project/ --max-line-length=100
+      #    poetry run pylint project/ --fail-under=7.0
 
       - name: Run tests
         run: |

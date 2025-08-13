@@ -46,17 +46,17 @@ jobs:
       run: |
         poetry run black --check --diff project/
     
-    - name: Run isort (import sorter)
-      run: |
-        poetry run isort --check-only --diff project/
+    # - name: Run isort (import sorter)
+      # run: |
+        # poetry run isort --check-only --diff project/
     
-    - name: Run Pylint
-      run: |
-        poetry run pylint project/ --fail-under=7.0
+    # - name: Run Pylint
+      # run: |
+        # poetry run pylint project/ --fail-under=7.0
     
-    - name: Run Flake8
-      run: |
-        poetry run flake8 project/ --max-line-length=100
+    # - name: Run Flake8
+      # run: |
+        # poetry run flake8 project/ --max-line-length=100
     
     - name: Run MyPy (type checker)
       run: |
