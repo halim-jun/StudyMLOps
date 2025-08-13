@@ -1,6 +1,10 @@
 from pathlib import Path
+import sys
 
-from .pipeline import ModelPipeline
+# Ensure repo root is on sys.path so absolute package import always works
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from project.src.pipeline import ModelPipeline
 from sklearn.metrics import classification_report
 
 if __name__ == "__main__":
