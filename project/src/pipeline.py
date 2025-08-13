@@ -29,12 +29,8 @@ class ModelPipeline:
         data = data.drop_duplicates()
         data_processed = data.copy()
 
-        data_processed.loc[
-            data_processed["Personality"] == "Extrovert", "extrovert"
-        ] = 1
-        data_processed.loc[
-            data_processed["Personality"] == "Introvert", "extrovert"
-        ] = 0
+        data_processed.loc[data_processed["Personality"] == "Extrovert", "extrovert"] = 1
+        data_processed.loc[data_processed["Personality"] == "Introvert", "extrovert"] = 0
         data_processed.loc[data_processed["Stage_fear"] == "Yes", "Stage_fear_bool"] = 1
         data_processed.loc[data_processed["Stage_fear"] == "No", "Stage_fear_bool"] = 0
         data_processed.loc[
@@ -60,9 +56,7 @@ class ModelPipeline:
         return data_processed
 
     def train_test_split(self, data: pd.DataFrame, path: str, test_size: float = 0.2):
-        train_data, test_data = train_test_split(
-            data, test_size=test_size, random_state=42
-        )
+        train_data, test_data = train_test_split(data, test_size=test_size, random_state=42)
         train_data.to_csv(path + "/train_data.csv", index=False)
         test_data.to_csv(path + "/test_data.csv", index=False)
         self.train_data = train_data

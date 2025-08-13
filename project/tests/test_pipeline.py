@@ -5,11 +5,20 @@ from project.src.pipeline import ModelPipeline
 
 
 def _make_tiny_raw_csv(tmp_dir: Path) -> Path:
-    df = pd.DataFrame({
-        "Personality": ["Extrovert", "Introvert", "Extrovert", "Introvert", "Extrovert", "Introvert"],
-        "Stage_fear": ["Yes", "No", "Yes", "No", "No", "Yes"],
-        "Drained_after_socializing": ["Yes", "No", "No", "Yes", "No", "Yes"],
-    })
+    df = pd.DataFrame(
+        {
+            "Personality": [
+                "Extrovert",
+                "Introvert",
+                "Extrovert",
+                "Introvert",
+                "Extrovert",
+                "Introvert",
+            ],
+            "Stage_fear": ["Yes", "No", "Yes", "No", "No", "Yes"],
+            "Drained_after_socializing": ["Yes", "No", "No", "Yes", "No", "Yes"],
+        }
+    )
     csv_path = tmp_dir / "tiny.csv"
     df.to_csv(csv_path, index=False)
     return csv_path
@@ -19,7 +28,9 @@ def test_process_train_predict(tmp_path: Path):
     raw_csv = _make_tiny_raw_csv(Path(tmp_path))
     mp = ModelPipeline(str(raw_csv))
     processed = mp.preprocess_data()
-    assert {"Stage_fear_bool", "Drained_after_socializing_bool", "extrovert"}.issubset(processed.columns)
+    assert {"Stage_fear_bool", "Drained_after_socializing_bool", "extrovert"}.issubset(
+        processed.columns
+    )
 
     train_df, test_df = mp.train_test_split(processed, str(tmp_path))
     assert not train_df.empty and not test_df.empty
