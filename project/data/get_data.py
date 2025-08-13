@@ -1,7 +1,8 @@
-import kagglehub
-import shutil
 import os
+import shutil
 from pathlib import Path
+
+import kagglehub
 
 # Get the directory where this script is located
 script_dir = Path(__file__).parent

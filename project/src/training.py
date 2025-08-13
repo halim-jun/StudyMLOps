@@ -1,6 +1,7 @@
 from pathlib import Path
-from sklearn.metrics import classification_report
+
 from pipeline import ModelPipeline
+from sklearn.metrics import classification_report
 
 if __name__ == "__main__":
     # Get the project root directory (two levels up from this script)
