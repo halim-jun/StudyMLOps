@@ -1,8 +1,9 @@
 import runpy
 from pathlib import Path
+from _pytest.monkeypatch import MonkeyPatch
 
 
-def test_training_entrypoint_runs(monkeypatch, tmp_path):
+def test_training_entrypoint_runs(monkeypatch: MonkeyPatch, tmp_path: Path) -> None:
     # Run the training module as a script under pytest so coverage captures it
     # Save artifacts into a temp directory to avoid polluting the repo
     monkeypatch.chdir(Path(tmp_path))

@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Set
 
 import numpy as np
 import pandas as pd
@@ -26,7 +27,7 @@ def _make_tiny_raw_csv(tmp_dir: Path) -> Path:
     return csv_path
 
 
-def test_process_train_predict(tmp_path: Path):
+def test_process_train_predict(tmp_path: Path) -> None:
     raw_csv = _make_tiny_raw_csv(Path(tmp_path))
     mp = ModelPipeline(str(raw_csv))
     processed = mp.preprocess_data()
@@ -40,7 +41,7 @@ def test_process_train_predict(tmp_path: Path):
     mp.train_model(train_df)
     preds = mp.predict(test_df)
     assert len(preds) == len(test_df)
-    uniq = set(map(int, np.unique(preds)))
+    uniq: Set[int] = set(map(int, np.unique(preds)))
     assert uniq.issubset({0, 1})
 
     # ensure artifacts are written
