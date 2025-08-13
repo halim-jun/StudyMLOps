@@ -2,10 +2,12 @@
 name : implement github action for training and testing
 
 #Event 가 실행되는 시점 - 메인에 push 되었을때 시행
-on : 
+on :
   push:
-    branches: 
+    branches:
       - main
+      - develop
+  workflow_dispatch:
 
 #하나의 workflow 는 하나 이상의 job 으로 구성됨
 #여러 job 은 병렬적으로 수행됨
