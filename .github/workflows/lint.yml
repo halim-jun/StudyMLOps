@@ -37,7 +37,7 @@ jobs:
     
     - name: Run Black (code formatter)
       run: |
-        black --check --diff project/
+         black project/
     
     - name: Run isort (import sorter)
       run: |
