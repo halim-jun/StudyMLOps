@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from pipeline import ModelPipeline
+from .pipeline import ModelPipeline
 from sklearn.metrics import classification_report
 
 if __name__ == "__main__":
@@ -14,6 +14,6 @@ if __name__ == "__main__":
     train_data, test_data = model_pipeline.train_test_split(data, str(data_path))
     model_pipeline.train_model(train_data)
     predictions = model_pipeline.predict(test_data)
-    classification_report = classification_report(test_data["extrovert"], predictions)
+    report = classification_report(test_data["extrovert"], predictions)
     model_pipeline.save_model("logistic_clf.joblib")
-    print(classification_report)
+    print(report)
