@@ -24,7 +24,7 @@ def test_process_train_predict(tmp_path: Path):
     train_df, test_df = mp.train_test_split(processed, str(tmp_path))
     assert not train_df.empty and not test_df.empty
 
-    model = mp.train_model(train_df)
+    mp.train_model(train_df)
     preds = mp.predict(test_df)
     assert len(preds) == len(test_df)
     uniq = set(map(int, np.unique(preds)))

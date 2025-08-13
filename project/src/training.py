@@ -1,11 +1,5 @@
-import pandas as pd
-import sys
-import os
 from pathlib import Path
 from sklearn.metrics import classification_report
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from pipeline import ModelPipeline
 
 if __name__ == "__main__":
