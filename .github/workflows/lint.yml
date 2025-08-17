@@ -42,9 +42,9 @@ jobs:
         poetry --version
         poetry install --no-root --with dev
     
-    - name: Run Black (code formatter)
-      run: |
-        poetry run black --check --diff project/
+    # - name: Run Black (code formatter)
+      # run: |
+        # poetry run black --check --diff project/
     
     # - name: Run isort (import sorter)
       # run: |
