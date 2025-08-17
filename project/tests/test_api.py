@@ -11,7 +11,7 @@ from project.src.main import app
 
 # Load the actual model for testing
 @pytest.fixture(scope="module", autouse=True)
-def load_model_for_tests():
+def load_model_for_tests()-> None:
     """Load the actual trained model for API tests"""
     from project.src import main
     
@@ -28,7 +28,7 @@ def load_model_for_tests():
 client = TestClient(app)
 
 
-def test_root_endpoint():
+def test_root_endpoint()-> None:
     """Test the root endpoint"""
     response = client.get("/")
     assert response.status_code == 200
@@ -38,7 +38,7 @@ def test_root_endpoint():
     assert data["status"] == "running"
 
 
-def test_health_endpoint():
+def test_health_endpoint()-> None:
     """Test the health check endpoint"""
     response = client.get("/health")
     assert response.status_code == 200
@@ -47,7 +47,7 @@ def test_health_endpoint():
     assert data["status"] == "healthy"
 
 
-def test_predict_valid_input():
+def test_predict_valid_input()-> None:
     """Test prediction with valid input"""
     response = client.post(
         "/predict",
@@ -81,7 +81,7 @@ def test_predict_valid_input():
     assert abs(probs["Introvert"] + probs["Extrovert"] - 1.0) < 0.001
 
 
-def test_predict_invalid_input_missing_field():
+def test_predict_invalid_input_missing_field()-> None:
     """Test prediction with missing required field"""
     response = client.post(
         "/predict",
@@ -97,7 +97,7 @@ def test_predict_invalid_input_missing_field():
     assert response.status_code == 422  # Validation error
 
 
-def test_predict_invalid_input_wrong_type():
+def test_predict_invalid_input_wrong_type()-> None:
     """Test prediction with wrong data type"""
     response = client.post(
         "/predict",
@@ -122,7 +122,7 @@ def test_predict_invalid_input_wrong_type():
     (False, True),
     (False, False),
 ])
-def test_predict_all_combinations(stage_fear, drained):
+def test_predict_all_combinations(stage_fear: bool, drained: bool) -> None:
     """Test all possible input combinations"""
     response = client.post(
         "/predict",

@@ -28,7 +28,7 @@ class PredictionRequest(BaseModel):
 model = None
 
 @app.on_event("startup")
-async def load_model():
+async def load_model()-> None:
     """Load the trained model on startup"""
     global model
     try:
@@ -42,7 +42,7 @@ async def load_model():
         print(f"Error loading model: {e}")
 
 @app.get("/")
-def root():
+def root() -> Dict[str, Any]:
     return {
         "message": "Personality Prediction API", 
         "status": "running",
@@ -50,7 +50,7 @@ def root():
     }
 
 @app.get("/health")
-def health_check():
+def health_check()-> Dict[str,Any]:
     return {
         "status": "healthy",
         "model_loaded": model is not None
@@ -115,3 +115,16 @@ def predict(request: PredictionRequest) -> Dict[str, Any]:
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
+    
+#Testing with CURL
+# curl -X POST "http://127.0.0.1:8000/predict" \
+#      -H "Content-Type: application/json" \
+# -d '{
+#   "Stage_fear_bool": true,
+#   "Drained_after_socializing_bool": true,
+#   "Time_spent_Alone": 0,
+#   "Social_event_attendance": 0,
+#   "Going_outside": 0,
+#   "Friends_circle_size": 0,
+#   "Post_frequency": 0
+# }'
